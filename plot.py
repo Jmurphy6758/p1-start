@@ -36,7 +36,9 @@ plt.xlabel('Strain(%)')
 plt.ylabel('Stress[MPa]')
 plt.plot(strain,reg,linestyle='--',linewidth=1,label="Young's Modulus")
 plt.legend(loc='best',fontsize=15) #Change font size here on legend
+plt.savefig(filename+'.pdf')
 plt.show()
+print("Young's Modulus = "+str(m))
 
 
 # Part 2
