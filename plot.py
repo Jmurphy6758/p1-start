@@ -4,7 +4,7 @@ import sys
 
 filename = sys.argv[1]        # Stores ARG1 in filename, as in: $ python plot.py ARG1 ARG2 
 data = np.loadtxt(filename,skiprows=32,delimiter=",")   # Attempts to load filename into local variable data.
-
+#Skip past row 32 and find variable separated by a comma
 
 
 ## Part 0
@@ -22,9 +22,24 @@ data = np.loadtxt(filename,skiprows=32,delimiter=",")   # Attempts to load filen
 # plot raw-data/Sp15_245L_sect-001_group-1_glass.raw
 # Make sure to include axis labels and units!
 # plt.plot(xdata,ydata, arguments-to-make-plot-pretty)
+end= (len(data)-1)
+strain= data[:,7]
+stress= data[:,3]
+m,b=np.polyfit(strain,stress,1)
+f_linear=np.poly1d((m,b))
+reg=(b+m*strain)
+#Y=mx+b
+
+plt.plot(strain,stress,color='k',linestyle='-',linewidth=1)
+
+plt.xlabel('Strain(%)')
+plt.ylabel('Stress[MPa]')
+plt.plot(strain,reg,linestyle='--',linewidth=1,label="Young's Modulus")
+plt.legend(loc='best',fontsize=15) #Change font size here on legend
+plt.show()
 
 
-## Part 2
+# Part 2
 # Check to see if your code in part 1 will plot all of the files in raw-data/
 # Edit the files (use git liberally here!) to make them more usable
 
